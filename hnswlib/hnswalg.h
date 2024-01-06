@@ -299,11 +299,12 @@ namespace hnswlib {
                 queue_closest.pop();
                 bool good = true;
                 for (std::pair<dist_t, tableint> second_pair : return_list) {
+                    dist_t dist_ele = -second_pair.first;
                     dist_t curdist =
                             fstdistfunc_(getDataByInternalId(second_pair.second),
                                          getDataByInternalId(curent_pair.second),
                                          dist_func_param_);;
-                    if (curdist < dist_to_query) {
+                    if (dist_ele > curdist) {
                         good = false;
                         break;
                     }
